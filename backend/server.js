@@ -4,7 +4,8 @@ const express = require('express');
 //Import dotenv
 require('dotenv').config();
 
-const balanceRoutes = require('./routes/balance');
+const fileRoutes = require('./routes/files');
+const userRoutes = require('./routes/users');
 
 //Created new app instance of express
 const app = new express();
@@ -15,7 +16,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/balance', balanceRoutes);
+app.use('/api/files', fileRoutes);
+app.use('/api/users', userRoutes);
 
 //Server waiting for req
 app.listen(process.env.PORT, () => {
