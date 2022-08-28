@@ -9,6 +9,8 @@ export const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email, password);
+    setEmail('');
+    setPassword('');
   };
 
   return (
@@ -20,7 +22,7 @@ export const LoginForm = () => {
       >
         <label>Email</label>
         <input
-          type='email'
+          type='text'
           className='border-2 border-blue-100'
           value={email}
           onChange={(e) => {
