@@ -5,18 +5,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //Create schema instance and define data structure
-const fileSchema = new Schema(
+const noteSchema = new Schema(
   {
-    file: {
-      type: Buffer,
-      required: true,
-    },
-    filename: {
-      type: String,
-      required: true,
-    },
-
-    user_id: {
+    text: {
       type: String,
       required: true,
     },
@@ -24,4 +15,4 @@ const fileSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model('Note', noteSchema);

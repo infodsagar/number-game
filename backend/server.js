@@ -6,7 +6,7 @@ const express = require('express');
 //Import dotenv
 require('dotenv').config();
 
-const fileRoutes = require('./routes/files');
+const noteRoutes = require('./routes/notes');
 const userRoutes = require('./routes/users');
 
 //Created new app instance of express
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/files', fileRoutes);
+app.use('/api/notes', noteRoutes);
 app.use('/api/users', userRoutes);
 
 mongoose
