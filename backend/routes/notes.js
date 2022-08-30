@@ -12,6 +12,11 @@ const {
   updateNote,
 } = require('../controllers/noteController');
 
+const requireAuth = require('../middleware/requireAuth');
+
+//Midleware auth req
+router.use(requireAuth);
+
 //Get all files
 router.get('/', getNotes);
 
