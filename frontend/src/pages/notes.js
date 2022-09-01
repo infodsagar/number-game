@@ -9,7 +9,6 @@ export const Notes = () => {
   const { dispatch, notes } = useNotesContext();
 
   useEffect(() => {
-    console.log(user);
     const featchNotes = async () => {
       const response = await fetch('api/notes', {
         method: 'GET',

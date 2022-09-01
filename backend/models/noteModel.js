@@ -11,6 +11,10 @@ const noteSchema = new Schema(
       type: String,
       required: true,
     },
+    file: {
+      type: Buffer,
+      contentType: String,
+    },
     user_id: {
       type: String,
       required: true,

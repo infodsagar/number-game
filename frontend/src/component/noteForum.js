@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNotesContext } from '../hooks/useNotesContext';
+import FileBase64 from 'react-file-base64';
 
 export const NoteForum = () => {
   const [text, setText] = useState('');
+  const [file, setFile] = useState(null);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState('');
   const { user } = useAuthContext();
@@ -19,7 +21,7 @@ export const NoteForum = () => {
       setIsLoading(false);
     }
 
-    const note = { text };
+    const note = { text, file };
 
     const response = await fetch('/api/notes', {
       method: 'POST',
@@ -28,6 +30,7 @@ export const NoteForum = () => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${user.token}`,
       },
+      enctype: 'multipart/form-data',
     });
 
     const json = await response.json();
@@ -48,6 +51,14 @@ export const NoteForum = () => {
   return (
     <form className='mt-10' onSubmit={handleSubmit}>
       <input
+        type='file'
+        className='border-2 border-blue-200  mx-4'
+        onChange={(e) => {
+          setFile(e.target.files[0]);
+        }}
+      />
+      <FileBase64 multiple={false} onDone={this.getFiles.bind(this)} />
+      <input
         type='text'
         className='border-2 border-blue-200'
         value={text}
@@ -55,7 +66,7 @@ export const NoteForum = () => {
           setText(e.target.value);
         }}
       />
-      <button className='pl-4' disabled={isLoading}>
+      <button className='ml-4 px-2 border-2 rounded-lg' disabled={isLoading}>
         Submit
       </button>
       {error}

@@ -1,8 +1,7 @@
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNotesContext } from '../hooks/useNotesContext';
 
-export const NoteDetails = (note) => {
-  const { text, _id } = note.note;
+export const NoteDetails = ({ note }) => {
   const { user } = useAuthContext();
   const { dispatch } = useNotesContext();
 
@@ -11,7 +10,7 @@ export const NoteDetails = (note) => {
       return;
     }
 
-    const response = await fetch('/api/notes/' + _id, {
+    const response = await fetch('/api/notes/' + note._id, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${user.token}` },
     });
@@ -19,13 +18,13 @@ export const NoteDetails = (note) => {
     const json = await response.json();
 
     if (response.ok) {
-      dispatch({ action: 'DELETE_NOTE', payload: json });
+      dispatch({ type: 'DELETE_NOTE', payload: json });
     }
   };
 
   return (
     <div>
-      <span>{text}</span>
+      <span>{note.text}</span>
       <button onClick={handleClick}>Delete</button>
     </div>
   );

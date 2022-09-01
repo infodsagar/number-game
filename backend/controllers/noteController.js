@@ -1,6 +1,11 @@
 const Note = require('../models/noteModel');
 const mongoose = require('mongoose');
 
+
+
+
+
+
 //Get all products
 const getNotes = async (req, res) => {
   const user_id = req.user._id;
@@ -28,7 +33,7 @@ const getNote = async (req, res) => {
 
 //Add new note
 const createNote = async (req, res) => {
-  const { text } = req.body;
+  const { text, file } = req.body;
 
   let emptyFields = [];
 
@@ -42,7 +47,7 @@ const createNote = async (req, res) => {
 
   try {
     const user_id = req.user.id;
-    const note = await Note.create({ text, user_id });
+    const note = await Note.create({ text, file, user_id });
     res.status(200).json(note);
   } catch (err) {
     res.status(400).json({ err: err.message });
