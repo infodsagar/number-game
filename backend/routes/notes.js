@@ -8,6 +8,7 @@ const {
   getNotes,
   getNote,
   createNote,
+  createNote2,
   deleteNote,
   updateNote,
 } = require('../controllers/noteController');
@@ -25,6 +26,9 @@ router.get('/:id', getNote);
 
 //Add file
 router.post('/', createNote);
+
+//Add text only
+router.post('/text', createNote2);
 
 //Delete file
 router.delete('/:id', deleteNote);

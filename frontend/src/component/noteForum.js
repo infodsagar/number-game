@@ -10,41 +10,11 @@ export const NoteForum = () => {
   const { user } = useAuthContext();
   const { dispatch } = useNotesContext();
 
-  const handleSubmit2 = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
-    const formdata = new FormData();
-    formdata.append('image', file);
+  const formdata = new FormData();
+  formdata.append('image', file);
+  formdata.append('text', text);
 
-    if (!user) {
-      setError('Please login');
-      setIsLoading(false);
-    }
-
-    //File handle
-    const response = await fetch('/api/notes', {
-      method: 'POST',
-      body: formdata,
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-
-    const json = await response.json();
-
-    if (!response.ok) {
-      setError(json.error);
-      setIsLoading(false);
-    }
-
-    if (response.ok) {
-      setText('');
-      console.log('new note added');
-
-      setIsLoading(false);
-    }
-  };
+  const note = { text };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,34 +26,68 @@ export const NoteForum = () => {
       setIsLoading(false);
     }
 
-    const note = { text };
-
-    const response = await fetch('/api/notes', {
-      method: 'POST',
-      body: JSON.parse(note),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-
-    const json = await response.json();
-
-    if (!response.ok) {
-      setError(json.error);
+    if (!text && !file) {
+      setError(`Can't submit empty response`);
       setIsLoading(false);
     }
 
-    if (response.ok) {
-      setText('');
-      console.log('new note added');
-      dispatch({ type: 'CREATE_NOTE', payload: json });
-      setIsLoading(false);
+    //Text only
+    if (!file && text) {
+      console.log('text only ' + text);
+
+      const response = await fetch('/api/notes/text', {
+        method: 'POST',
+        body: JSON.stringify(note),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      const json = await response.json();
+
+      if (!response.ok) {
+        setError(json.error);
+        setIsLoading(false);
+      }
+
+      if (response.ok) {
+        setText('');
+        console.log('new note added');
+        console.log(json);
+        dispatch({ type: 'CREATE_NOTE', payload: json });
+        setIsLoading(false);
+      }
+    } else {
+      console.log('file and text or file only');
+      const response = await fetch('/api/notes', {
+        method: 'POST',
+        body: formdata,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      const json = await response.json();
+
+      if (!response.ok) {
+        setError(json.error);
+        setIsLoading(false);
+      }
+
+      if (response.ok) {
+        setText('');
+        setFile(null);
+        console.log('new note added');
+        console.log(json);
+        dispatch({ type: 'CREATE_NOTE', payload: json });
+        setIsLoading(false);
+      }
     }
   };
 
   return (
-    <form className='mt-10' onSubmit={handleSubmit2}>
+    <form className='mt-10' onSubmit={handleSubmit}>
       <input
         type='file'
         className='border-2 border-blue-200  mx-4'

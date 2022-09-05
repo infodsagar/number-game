@@ -4,6 +4,7 @@ import { useNotesContext } from '../hooks/useNotesContext';
 export const NoteDetails = ({ note }) => {
   const { user } = useAuthContext();
   const { dispatch } = useNotesContext();
+  const { text, fileUrl } = note;
 
   const handleClick = async () => {
     if (!user) {
@@ -24,8 +25,13 @@ export const NoteDetails = ({ note }) => {
 
   return (
     <div>
-      <span>{note.text}</span>
-      <button onClick={handleClick}>Delete</button>
+      <span key={note.id}>{text ? text : ''}</span>
+      <br />
+      {fileUrl ? <img key={note.id} src={fileUrl} alt='img box' /> : ''}
+
+      <button onClick={handleClick} key={note.id}>
+        Delete
+      </button>
     </div>
   );
 };

@@ -7,17 +7,14 @@ const Schema = mongoose.Schema;
 //Create schema instance and define data structure
 const noteSchema = new Schema(
   {
+    fileUrl: {
+      type: String,
+    },
     text: {
       type: String,
-      required: true,
-    },
-    file: {
-      type: Buffer,
-      contentType: String,
     },
     user_id: {
       type: String,
-      required: true,
     },
   },
   { timestamps: true }

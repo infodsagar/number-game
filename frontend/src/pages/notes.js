@@ -27,7 +27,7 @@ export const Notes = () => {
   }, [dispatch, user]);
 
   return (
-    <div className='flex items-center flex-col'>
+    <div className='flex items-center flex-col overflow-y-hidden'>
       <span className='mt-10 text-2xl'>Notes</span>
       <div className='border-2 border-blue-200  w-[35vw] min-w-[400px] max-w-[1000px] min-h-[300px] h-[50vh]'>
         {notes &&

@@ -2,7 +2,7 @@ const Note = require('../models/noteModel');
 const mongoose = require('mongoose');
 const aws = require('aws-sdk');
 const multer = require('multer');
-const multerS3 = require('multer-s3');
+const multerS3 = require('multer-s3-v2');
 
 //Setup AWS
 const s3 = new aws.S3({
@@ -27,33 +27,45 @@ const upload = (bucketName) =>
   });
 
 //Add file
-const createNote = (req, res, next) => {
-  const uploadSingle = upload('profile-picture-upload-youtube').single('image');
+const createNote = async (req, res, next) => {
+  console.log(req.file);
+  const uploadSingle = upload('omni-project-files').single('image');
+  const user_id = req.user.id;
 
   uploadSingle(req, res, async (err) => {
     if (err)
       return res.status(400).json({ success: false, message: err.message });
 
-    res.status(200).json({ data: req.file });
+    const note = await Note.create({
+      fileUrl: req.file.location,
+      user_id,
+      text: req.body.text,
+    });
+    res.status(200).json({ data: note });
   });
+};
 
-  // let emptyFields = [];
+//Add new note
+const createNote2 = async (req, res) => {
+  const { text } = req.body;
 
-  // if (!file) {
-  //   emptyFields.push('file');
-  // }
+  let emptyFields = [];
 
-  // if (emptyFields.length > 0) {
-  //   return res.status(400).json({ error: 'Please enter file', emptyFields });
-  // }
+  if (!text) {
+    emptyFields.push('text');
+  }
 
-  // try {
-  //   const user_id = req.user.id;
-  //   const note = await Note.create({ file, user_id });
-  //   res.status(200).json({ data: note });
-  // } catch (err) {
-  //   res.status(400).json({ err: err.message });
-  // }
+  if (emptyFields.length > 0) {
+    return res.status(400).json({ error: 'Please enter text', emptyFields });
+  }
+
+  try {
+    const user_id = req.user.id;
+    const note = await Note.create({ text, user_id });
+    res.status(200).json(note);
+  } catch (err) {
+    res.status(400).json({ err: err.message });
+  }
 };
 
 //Get all products
@@ -79,29 +91,6 @@ const getNote = async (req, res) => {
   }
 
   res.status(200).json(note);
-};
-
-//Add new note
-const createNote2 = async (req, res) => {
-  const { text, file } = req.body;
-
-  let emptyFields = [];
-
-  if (!text) {
-    emptyFields.push('text');
-  }
-
-  if (emptyFields.length > 0) {
-    return res.status(400).json({ error: 'Please enter text', emptyFields });
-  }
-
-  try {
-    const user_id = req.user.id;
-    const note = await Note.create({ text, file, user_id });
-    res.status(200).json(note);
-  } catch (err) {
-    res.status(400).json({ err: err.message });
-  }
 };
 
 //Delete product
@@ -145,6 +134,7 @@ const updateNote = async (req, res) => {
 
 module.exports = {
   createNote,
+  createNote2,
   getNotes,
   getNote,
   deleteNote,
