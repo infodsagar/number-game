@@ -28,7 +28,6 @@ const upload = (bucketName) =>
 
 //Add file
 const createNote = async (req, res, next) => {
-  console.log(req.file);
   const uploadSingle = upload('omni-project-files').single('image');
   const user_id = req.user.id;
 
@@ -72,7 +71,7 @@ const createNote2 = async (req, res) => {
 const getNotes = async (req, res) => {
   const user_id = req.user._id;
 
-  const notes = await Note.find({ user_id }).sort({ createdAt: -1 });
+  const notes = await Note.find({ user_id }).sort({ createdAt: 1 });
   res.status(200).json(notes);
 };
 

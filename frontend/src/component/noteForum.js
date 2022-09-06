@@ -53,12 +53,12 @@ export const NoteForum = () => {
 
       if (response.ok) {
         setText('');
-        console.log('new note added');
-        console.log(json);
+        setFile(null);
         dispatch({ type: 'CREATE_NOTE', payload: json });
         setIsLoading(false);
       }
     } else {
+      //File
       console.log('file and text or file only');
       const response = await fetch('/api/notes', {
         method: 'POST',
@@ -79,7 +79,6 @@ export const NoteForum = () => {
         setText('');
         setFile(null);
         console.log('new note added');
-        console.log(json);
         dispatch({ type: 'CREATE_NOTE', payload: json });
         setIsLoading(false);
       }
@@ -91,8 +90,11 @@ export const NoteForum = () => {
       <input
         type='file'
         className='border-2 border-blue-200  mx-4'
-        onChange={(e) => {
-          setFile(e.target.files[0]);
+        onChange={(event) => {
+          setFile(event.target.files[0]);
+        }}
+        onClick={(e) => {
+          e.target.value = null;
         }}
       />
 
@@ -104,7 +106,9 @@ export const NoteForum = () => {
           setText(e.target.value);
         }}
       />
-      <button className='ml-4 px-2 border-2 rounded-lg'>Submit</button>
+      <button className='ml-4 px-2 border-2 rounded-lg' disabled={isLoading}>
+        Submit
+      </button>
       {error}
     </form>
   );
