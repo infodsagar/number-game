@@ -32,8 +32,15 @@ const createNote = async (req, res, next) => {
   const user_id = req.user.id;
 
   uploadSingle(req, res, async (err) => {
-    if (err)
+    if (req.fileValidationError) {
+      return res.send(req.fileValidationError);
+    } else if (!req.file) {
+      return res.send('Please select an image to upload');
+    } else if (err instanceof multer.MulterError) {
+      return res.send(err);
+    } else if (err) {
       return res.status(400).json({ success: false, message: err.message });
+    }
 
     const note = await Note.create({
       fileUrl: req.file.location,
