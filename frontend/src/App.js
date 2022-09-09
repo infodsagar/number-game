@@ -20,7 +20,10 @@ function App() {
             element={!user ? <LoginForm /> : <Navigate to='/notes' />}
           />
           <Route path='/signup' element={<SignupForm />} />
-          <Route path='/notes' element={<Notes />} />
+          <Route
+            path='/notes'
+            element={user ? <Notes /> : <Navigate to='/login'></Navigate>}
+          />
         </Routes>
       </BrowserRouter>
     </>

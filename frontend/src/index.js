@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import { AuthContextProvider } from './context/authContext';
 import { NotesContextProvider } from './context/noteContext';
+import RenderSnackbar from './context/snackbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
       <NotesContextProvider>
-        <App />
+        <RenderSnackbar>
+          <App />
+        </RenderSnackbar>
       </NotesContextProvider>
     </AuthContextProvider>
   </React.StrictMode>

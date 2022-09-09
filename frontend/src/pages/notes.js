@@ -1,12 +1,16 @@
 import { NoteForum } from '../component/noteForum';
-import { useEffect } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNotesContext } from '../hooks/useNotesContext';
 import { NoteDetails } from '../component/notesDetails';
+import { useLogout } from '../hooks/useLogout';
+import { SnackbarContext } from '../context/snackbar';
 
 export const Notes = () => {
   const { user } = useAuthContext();
   const { dispatch, notes } = useNotesContext();
+  const { logout } = useLogout();
+  const setStateSnackbarContext = useContext(SnackbarContext);
 
   useEffect(() => {
     const featchNotes = async () => {
@@ -19,6 +23,13 @@ export const Notes = () => {
 
       if (response.ok) {
         dispatch({ type: 'SET_NOTES', payload: json });
+      } else {
+        logout();
+        return setStateSnackbarContext(
+          true,
+          'Login session expired!!',
+          'warning'
+        );
       }
     };
     if (user) {
