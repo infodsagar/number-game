@@ -1,13 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useDelete } from '../hooks/useDelete';
 
 export const Navbar = () => {
   const { user } = useAuthContext();
   const { logout } = useLogout();
+  const { deleteUser } = useDelete();
 
   const handleClick = () => {
     logout();
+  };
+
+  const handleClick2 = () => {
+    deleteUser();
   };
 
   return (
@@ -29,6 +35,12 @@ export const Navbar = () => {
             onClick={handleClick}
           >
             Logout
+          </button>
+          <button
+            className={user ? 'text-lg pl-4' : 'hidden'}
+            onClick={handleClick2}
+          >
+            Delete account
           </button>
         </nav>
       </div>

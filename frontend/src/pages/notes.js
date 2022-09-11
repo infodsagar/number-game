@@ -1,10 +1,13 @@
 import { NoteForum } from '../component/noteForum';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNotesContext } from '../hooks/useNotesContext';
 import { NoteDetails } from '../component/notesDetails';
 import { useLogout } from '../hooks/useLogout';
 import { SnackbarContext } from '../context/snackbar';
+import bg from '../images/bg.jpg';
+import bg2 from '../images/bg2.jpg';
+import bg3 from '../images/bg3.jpg';
 
 export const Notes = () => {
   const { user } = useAuthContext();
@@ -39,8 +42,13 @@ export const Notes = () => {
 
   return (
     <div className='flex items-center flex-col'>
-      <span className='mt-10 text-2xl'>Notes</span>
-      <div className='border-2 border-blue-200  w-[35vw] min-w-[400px] max-w-[1000px] min-h-[300px] h-[50vh] overflow-y-auto'>
+      <span className='mt-4 text-xl'>Notes</span>
+      <div
+        className='border-2 border-blue-200  w-[35vw] min-w-[400px] max-w-[1000px] min-h-[300px] h-[70vh] max-h-[70vh] overflow-y-auto'
+        style={{
+          backgroundImage: `url(${bg3})`,
+        }}
+      >
         {notes &&
           notes.map((note) => {
             return <NoteDetails note={note} />;

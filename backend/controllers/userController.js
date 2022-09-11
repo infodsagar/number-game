@@ -3,7 +3,7 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '1m' });
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '1d' });
 };
 
 const loginUser = async (req, res) => {
@@ -47,4 +47,19 @@ const signupUser = async (req, res) => {
   }
 };
 
-module.exports = { loginUser, signupUser };
+const deleteUser = async (req, res) => {
+  const user_id = req.user._id;
+
+  if (!user_id) {
+    throw Error('Login first wit your credential to delete this account');
+  }
+
+  const user = await User.findOneAndDelete({ _id: user_id });
+
+  if (!user) {
+    res.status(404).json({ error: 'No such User' });
+  }
+  res.status(200).json(user);
+};
+
+module.exports = { loginUser, signupUser, deleteUser };

@@ -1,6 +1,7 @@
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNotesContext } from '../hooks/useNotesContext';
 import { useState, useEffect } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const NoteDetails = ({ note }) => {
   const { user } = useAuthContext();
@@ -47,21 +48,21 @@ export const NoteDetails = ({ note }) => {
   };
 
   return (
-    <div className='flex' key={note.id}>
-      <span className='bg-red-50 ml-4 mt-2'>{text ? text : ''}</span>
-      <br />
-      {fileUrl ? (
-        <img src={fileUrl} alt='img box' className='bg-red-50 ml-4 mt-2' />
-      ) : (
-        ''
-      )}
-
-      <button
-        onClick={handleClick}
-        className='ml-auto mr-3'
-        disabled={isLoading}
-      >
-        Delete
+    <div className='flex mb-2' key={note.id}>
+      <div className='bg-blue-400 px-2 py-1 ml-4 mt-2 rounded-lg'>
+        {fileUrl ? (
+          <img
+            src={fileUrl}
+            alt='img box'
+            className='max-w-[300px] mb-1 rounded-lg'
+          />
+        ) : (
+          ''
+        )}
+        {text ? <span className='text-white text-xl'>{text}</span> : ''}
+      </div>
+      <button onClick={handleClick} disabled={isLoading}>
+        <DeleteIcon color='disabled' size='small' className='max-w-[20px]' />
       </button>
     </div>
   );

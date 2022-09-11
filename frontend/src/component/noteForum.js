@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNotesContext } from '../hooks/useNotesContext';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
 
 export const NoteForum = () => {
   const [text, setText] = useState('');
@@ -9,6 +10,10 @@ export const NoteForum = () => {
   const [isLoading, setIsLoading] = useState('');
   const { user } = useAuthContext();
   const { dispatch } = useNotesContext();
+  const inputRef = useRef();
+  const triggerFile = () => {
+    inputRef.current.click();
+  };
 
   const formdata = new FormData();
   formdata.append('image', file);
@@ -86,25 +91,30 @@ export const NoteForum = () => {
   };
 
   return (
-    <form className='mt-10' onSubmit={handleSubmit}>
+    <form className='mt-4' onSubmit={handleSubmit}>
       <input
         type='file'
-        className='border-2 border-blue-200  mx-4'
+        className='border-2 border-blue-200 hidden'
         onChange={(event) => {
           setFile(event.target.files[0]);
         }}
         onClick={(e) => {
           e.target.value = null;
         }}
+        ref={inputRef}
       />
-
       <input
         type='text'
-        className='border-2 border-blue-200'
+        className='border-4 border-blue-200 rounded-lg w-[25vw]'
         value={text}
         onChange={(e) => {
           setText(e.target.value);
         }}
+      />
+      <AttachFileIcon
+        color='primary'
+        className='max-w-[30px] cursor-pointer'
+        onClick={triggerFile}
       />
       <button className='ml-4 px-2 border-2 rounded-lg' disabled={isLoading}>
         Submit
