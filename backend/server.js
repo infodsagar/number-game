@@ -6,6 +6,18 @@ const express = require('express');
 //Import dotenv
 require('dotenv').config();
 
+//Import path
+const path = require('path');
+
+//Static assests
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });
+}
+
 const noteRoutes = require('./routes/notes');
 const userRoutes = require('./routes/users');
 
@@ -24,6 +36,8 @@ app.use((req, res, next) => {
 
 app.use('/api/notes', noteRoutes);
 app.use('/api/users', userRoutes);
+
+const PORT = process.env.PORT || 4000;
 
 mongoose
   .connect(process.env.MONGO_URI)
