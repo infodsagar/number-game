@@ -22,6 +22,9 @@ export const Navbar = () => {
         <span className='text-lg ml-10'>
           <Link to='/'>Home</Link>
         </span>
+        <span className='text-lg ml-10'>
+          <Link to='/'>Notes</Link>
+        </span>
         <nav className='ml-auto mr-10'>
           <span className='text-lg'>{user ? user.email : ''}</span>
           <Link to='/login'>

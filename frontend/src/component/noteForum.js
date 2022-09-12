@@ -2,6 +2,9 @@ import { useState, useRef } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNotesContext } from '../hooks/useNotesContext';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import Input from '@mui/material/Input';
 
 export const NoteForum = () => {
   const [text, setText] = useState('');
@@ -91,7 +94,7 @@ export const NoteForum = () => {
   };
 
   return (
-    <form className='mt-4' onSubmit={handleSubmit}>
+    <form className='mt-4 flex items-center' onSubmit={handleSubmit}>
       <input
         type='file'
         className='border-2 border-blue-200 hidden'
@@ -103,9 +106,11 @@ export const NoteForum = () => {
         }}
         ref={inputRef}
       />
-      <input
+      <Input
         type='text'
-        className='border-4 border-blue-200 rounded-lg w-[25vw]'
+        size='small'
+        variant='filled'
+        className='w-[25vw]'
         value={text}
         onChange={(e) => {
           setText(e.target.value);
@@ -113,12 +118,18 @@ export const NoteForum = () => {
       />
       <AttachFileIcon
         color='primary'
-        className='max-w-[30px] cursor-pointer'
+        className='max-w-[30px] cursor-pointer mx-1'
         onClick={triggerFile}
       />
-      <button className='ml-4 px-2 border-2 rounded-lg' disabled={isLoading}>
+      <Button
+        variant='contained'
+        size='small'
+        disabled={isLoading}
+        type='submit'
+        endIcon={<SendIcon />}
+      >
         Submit
-      </button>
+      </Button>
       {error}
     </form>
   );

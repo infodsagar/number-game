@@ -5,8 +5,7 @@ import { useNotesContext } from '../hooks/useNotesContext';
 import { NoteDetails } from '../component/notesDetails';
 import { useLogout } from '../hooks/useLogout';
 import { SnackbarContext } from '../context/snackbar';
-import bg from '../images/bg.jpg';
-import bg2 from '../images/bg2.jpg';
+
 import bg3 from '../images/bg3.jpg';
 
 export const Notes = () => {
@@ -41,10 +40,9 @@ export const Notes = () => {
   }, [dispatch, user]);
 
   return (
-    <div className='flex items-center flex-col'>
-      <span className='mt-4 text-xl'>Notes</span>
+    <div className='flex items-center flex-col mt-2'>
       <div
-        className='border-2 border-blue-200  w-[35vw] min-w-[400px] max-w-[1000px] min-h-[300px] h-[70vh] max-h-[70vh] overflow-y-auto'
+        className='border-2 border-blue-200  w-[35vw] min-w-[400px] max-w-[1000px] min-h-[70vh] h-[75vh] max-h-[80vh] overflow-y-auto scroll-smooth'
         style={{
           backgroundImage: `url(${bg3})`,
         }}
