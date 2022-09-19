@@ -27,13 +27,13 @@ export const Navbar = () => {
   return (
     <>
       <div className='flex border-2 border-black'>
-        <span className='text-lg ml-6 md:ml-8 lg:ml-12'>
+        <span className='text-lg ml-4 md:ml-8 lg:ml-12'>
           <Link to='/'>Home</Link>
         </span>
-        <span className='text-lg ml-6 md:ml-8 lg:ml-12 mr-2'>
+        <span className='text-lg ml-4 md:ml-8 lg:ml-12 mr-2'>
           <Link to='/'>Notes</Link>
         </span>
-        <nav className='ml-auto mr-10'>
+        <nav className='ml-auto mr-4 md:mr-6 md:mr-10'>
           <div
             className={user ? 'text-lg cursor-pointer flex' : 'hidden'}
             onClick={handleDrop}

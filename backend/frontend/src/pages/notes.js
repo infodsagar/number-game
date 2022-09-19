@@ -43,7 +43,7 @@ export const Notes = () => {
     <div className='mt-2 grid grid-cols-12'>
       <div className='col-span-10 col-start-2 md:col-span-6 md:col-start-4 lg:col-span-4 lg:col-start-5'>
         <div
-          className='border-2 border-blue-200 min-h-[70vh] h-[75vh] max-h-[80vh] overflow-y-auto scroll-smooth'
+          className='border-2 border-blue-200 min-h-[70vh] h-[75vh] max-h-[80vh] overflow-y-auto overflow-x-hidden scroll-smooth'
           style={{
             backgroundImage: `url(${bg3})`,
           }}

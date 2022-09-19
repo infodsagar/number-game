@@ -54,7 +54,7 @@ export const NoteDetails = ({ note }) => {
           <img
             src={fileUrl}
             alt='img box'
-            className='max-w-[300px] mb-1 rounded-lg'
+            className='max-W-[150px] mb-1 rounded-lg'
           />
         ) : (
           ''
