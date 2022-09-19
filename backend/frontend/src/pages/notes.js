@@ -16,7 +16,7 @@ export const Notes = () => {
 
   useEffect(() => {
     const featchNotes = async () => {
-      const response = await fetch('api/notes', {
+      const response = await fetch('/api/notes', {
         method: 'GET',
         headers: { Authorization: `Bearer ${user.token}` },
       });
@@ -40,19 +40,21 @@ export const Notes = () => {
   }, [dispatch, user]);
 
   return (
-    <div className='flex items-center flex-col mt-2'>
-      <div
-        className='border-2 border-blue-200  w-[35vw] min-w-[400px] max-w-[1000px] min-h-[70vh] h-[75vh] max-h-[80vh] overflow-y-auto scroll-smooth'
-        style={{
-          backgroundImage: `url(${bg3})`,
-        }}
-      >
-        {notes &&
-          notes.map((note) => {
-            return <NoteDetails note={note} />;
-          })}
+    <div className='mt-2 grid grid-cols-12'>
+      <div className='col-span-10 col-start-2 md:col-span-6 md:col-start-4 lg:col-span-4 lg:col-start-5'>
+        <div
+          className='border-2 border-blue-200 min-h-[70vh] h-[75vh] max-h-[80vh] overflow-y-auto scroll-smooth'
+          style={{
+            backgroundImage: `url(${bg3})`,
+          }}
+        >
+          {notes &&
+            notes.map((note) => {
+              return <NoteDetails note={note} />;
+            })}
+        </div>
+        <NoteForum />
       </div>
-      <NoteForum />
     </div>
   );
 };

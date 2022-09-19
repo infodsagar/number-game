@@ -21,65 +21,63 @@ export const SignupForm = () => {
   };
 
   return (
-    <div className='flex flex-col items-center  mt-8'>
-      <span className='justify-self-center text-xl'>Signup</span>
-      <form
-        className='flex flex-col max-w-[600px] min-w-[400px] mt-8'
-        onSubmit={handleSubmit}
-      >
-        <label>First Name</label>
-        <input
-          type='text'
-          className='border-2 border-blue-100'
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
-        <label>Last Name</label>
-        <input
-          type='text'
-          className='border-2 border-blue-100'
-          value={surname}
-          onChange={(e) => {
-            setSurname(e.target.value);
-          }}
-        />
-        <label>Username</label>
-        <input
-          type='text'
-          className='border-2 border-blue-100'
-          value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-        />
-        <label>email</label>
-        <input
-          type='email'
-          className='border-2 border-blue-100'
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <label>Password</label>
-        <input
-          type='password'
-          className='border-2 border-blue-100'
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <button
-          className='border-2 border-blue-300 rounded-lg mt-4 min-w-[70%] self-center'
-          disabled={isLoading}
-        >
-          Submit
-        </button>
-        {error}
-      </form>
+    <div className='mt-8 grid grid-cols-12'>
+      <div className='col-span-10 col-start-2 md:col-span-6 md:col-start-4 lg:col-span-4 lg:col-start-5'>
+        <form className='flex flex-col mt-8' onSubmit={handleSubmit}>
+          <label>First Name</label>
+          <input
+            type='text'
+            className='border-2 border-blue-100'
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+          <label>Last Name</label>
+          <input
+            type='text'
+            className='border-2 border-blue-100'
+            value={surname}
+            onChange={(e) => {
+              setSurname(e.target.value);
+            }}
+          />
+          <label>Username</label>
+          <input
+            type='text'
+            className='border-2 border-blue-100'
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          />
+          <label>email</label>
+          <input
+            type='email'
+            className='border-2 border-blue-100'
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <label>Password</label>
+          <input
+            type='password'
+            className='border-2 border-blue-100'
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <button
+            className='border-2 border-blue-300 rounded-lg mt-4 min-w-[70%] self-center'
+            disabled={isLoading}
+          >
+            Submit
+          </button>
+          {error}
+        </form>
+      </div>
     </div>
   );
 };

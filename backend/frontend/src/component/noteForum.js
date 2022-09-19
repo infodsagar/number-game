@@ -110,7 +110,7 @@ export const NoteForum = () => {
         type='text'
         size='small'
         variant='filled'
-        className='w-[25vw]'
+        className='w-[100%]'
         value={text}
         onChange={(e) => {
           setText(e.target.value);

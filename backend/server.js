@@ -1,13 +1,33 @@
+//Import dotenv
+require('dotenv').config();
+
+//Import mongoose
 const mongoose = require('mongoose');
 
 //Imported express
 const express = require('express');
 
-//Import dotenv
-require('dotenv').config();
+//Created new app instance of express
+const app = new express();
+
+//Parse json
+app.use(express.json());
 
 //Import path
 const path = require('path');
+
+const noteRoutes = require('./routes/notes');
+const userRoutes = require('./routes/users');
+
+//Middleware to log connection
+app.use((req, res, next) => {
+  console.log('Connected on port ' + PORT);
+  console.log(req.path, req.method);
+  next();
+});
+
+app.use('/api/notes', noteRoutes);
+app.use('/api/users', userRoutes);
 
 //Static assests
 if (process.env.NODE_ENV === 'production') {
@@ -18,35 +38,16 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const noteRoutes = require('./routes/notes');
-const userRoutes = require('./routes/users');
-
-//Created new app instance of express
-const app = new express();
-
-//Parse json
-app.use(express.json());
-
-//Middleware to log connection
-app.use((req, res, next) => {
-  console.log('Connected on port ' + process.env.PORT);
-  console.log(req.path, req.method);
-  next();
-});
-
-app.use('/api/notes', noteRoutes);
-app.use('/api/users', userRoutes);
-
 const PORT = process.env.PORT || 4000;
 
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     //Server waiting for req
-    app.listen(process.env.PORT, () => {
-      console.log('Connected to DB & waiting on port ' + process.env.PORT);
+    app.listen(PORT, () => {
+      console.log('Connected to DB & waiting on port ' + PORT);
     });
   })
-  .catch((error) => {
+  .catch((err) => {
     console.log(err);
   });
