@@ -5,7 +5,6 @@ import { SignupForm } from './pages/signupForm';
 import { Notes } from './pages/notes';
 import { Home } from './pages/home';
 import { useAuthContext } from './hooks/useAuthContext';
-import { Chats } from './pages/chats';
 
 function App() {
   const { user } = useAuthContext();
@@ -28,7 +27,6 @@ function App() {
             path='/notes'
             element={user ? <Notes /> : <Navigate to='/login'></Navigate>}
           />
-          <Route path='/chats' element={<Chats />} />
         </Routes>
       </BrowserRouter>
     </>

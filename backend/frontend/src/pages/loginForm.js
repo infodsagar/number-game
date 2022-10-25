@@ -20,7 +20,7 @@ export const LoginForm = () => {
           <label className='text-lg'>Email</label>
           <input
             type='text'
-            className='border-2 border-blue-100 py-1 md:py-0'
+            className='border-2 border-blue-300 py-1'
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -30,7 +30,7 @@ export const LoginForm = () => {
           <label className='mt-4 text-lg'>Password</label>
           <input
             type='password'
-            className='border-2 border-blue-100 py-1 md:py-0'
+            className='border-2 border-blue-300 py-1'
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
@@ -38,7 +38,7 @@ export const LoginForm = () => {
           />
 
           <button
-            className='border-2 border-blue-300 rounded-lg mt-8 py-2 md:py-1 min-w-[70%] self-center text-lg'
+            className='border-2 border-blue-300 hover:bg-blue-400 rounded-lg mt-8 py-2 md:py-1 min-w-[70%] self-center text-lg'
             disabled={isLoading}
           >
             Submit

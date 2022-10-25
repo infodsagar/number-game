@@ -5,7 +5,6 @@ import { useNotesContext } from '../hooks/useNotesContext';
 import { NoteDetails } from '../component/notesDetails';
 import { useLogout } from '../hooks/useLogout';
 import { SnackbarContext } from '../context/snackbar';
-
 import bg3 from '../images/bg3.jpg';
 
 export const Notes = () => {

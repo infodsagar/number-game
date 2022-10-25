@@ -16,7 +16,10 @@ export const Navbar = () => {
   const { deleteUser } = useDelete();
   const [open, setOpen] = useState(null);
   const [open2, setOpen2] = useState(null);
-  const { ref1, ref2, ref3, ref4 } = useRef();
+  const ref1 = useRef();
+  const ref2 = useRef();
+  const ref3 = useRef();
+  const ref4 = useRef();
 
   const handleLogout = () => {
     logout();
@@ -42,7 +45,6 @@ export const Navbar = () => {
       // then close the menu
       if (!ref2.current.contains(e.target)) {
         if (open2 && ref1.current && !ref1.current.contains(e.target)) {
-          console.log('ref1');
           setOpen2(false);
         }
       }
@@ -74,13 +76,8 @@ export const Navbar = () => {
   return (
     <>
       <div className='flex border-b-[1px] border-black shadow-md'>
-        <span className='ml-4 my-1 md:hidden'>
-          <Button
-            variant='contained'
-            size='small'
-            onClick={handleDrop2}
-            ref={ref2}
-          >
+        <span className='ml-4 my-1 md:hidden' ref={ref2}>
+          <Button variant='contained' size='small' onClick={handleDrop2}>
             <DehazeIcon />
           </Button>
         </span>
@@ -91,14 +88,11 @@ export const Navbar = () => {
         <span className='text-lg ml-4 md:ml-8 lg:ml-12 mr-2 hidden md:flex hover:border-b-blue-300 border-b-white border-b-[3px]'>
           <Link to='/notes'>Notes</Link>
         </span>
-        <span className='text-lg ml-4 md:ml-8 lg:ml-12 mr-2 hidden md:flex hover:border-b-blue-300 border-b-white border-b-[3px]'>
-          <Link to='/chats'>Chats</Link>
-        </span>
+
         <nav className='ml-auto mr-4 md:mr-6 hidden md:flex'>
           <div
             className={user ? 'text-lg cursor-pointer flex ' : 'hidden'}
             onClick={handleDrop}
-            ref={ref3}
           >
             <span ref={ref4}>
               {user ? user.username : ''}
@@ -145,7 +139,7 @@ export const Navbar = () => {
         </nav>
       </div>
 
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1 }} ref={ref1}>
         <Grid container>
           <Grid xs={3}>
             <ul
@@ -154,7 +148,6 @@ export const Navbar = () => {
                   ? 'py-4 px-10  md:hidden bg-white absolute border-black border-r-[1px] border-b-[1px] rounded-md shadow-md'
                   : 'hidden'
               }
-              ref={ref1}
             >
               <li>{user ? user.username : ''}</li>
               <li
@@ -168,12 +161,6 @@ export const Navbar = () => {
                 onClick={handleDrop2}
               >
                 <Link to='/notes'>Notes</Link>
-              </li>
-              <li
-                className='mt-4 text-lg hover:border-b-blue-300 hover:border-b-[1px]'
-                onClick={handleDrop2}
-              >
-                <Link to='/chats'>Chats</Link>
               </li>
               <li
                 onClick={handleDelete}

@@ -27,7 +27,7 @@ export const SignupForm = () => {
           <label className='text-lg mt-4'>First Name</label>
           <input
             type='text'
-            className='border-2 border-blue-100 py-1 md:py-0'
+            className='border-2 border-blue-300 py-1 '
             value={name}
             onChange={(e) => {
               setName(e.target.value);
@@ -36,7 +36,7 @@ export const SignupForm = () => {
           <label className='text-lg mt-4'>Last Name</label>
           <input
             type='text'
-            className='border-2 border-blue-100 py-1 md:py-0'
+            className='border-2 border-blue-300 py-1 '
             value={surname}
             onChange={(e) => {
               setSurname(e.target.value);
@@ -45,7 +45,7 @@ export const SignupForm = () => {
           <label className='text-lg mt-4'>Username</label>
           <input
             type='text'
-            className='border-2 border-blue-100 py-1 md:py-0'
+            className='border-2 border-blue-300 py-1 '
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
@@ -54,7 +54,7 @@ export const SignupForm = () => {
           <label className='text-lg mt-4'>Email</label>
           <input
             type='email'
-            className='border-2 border-blue-100 py-1 md:py-0'
+            className='border-2 border-blue-300 py-1 '
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -63,14 +63,14 @@ export const SignupForm = () => {
           <label className='text-lg mt-4'>Password</label>
           <input
             type='password'
-            className='border-2 border-blue-100 py-1 md:py-0'
+            className='border-2 border-blue-300 py-1 '
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
           />
           <button
-            className='border-2 border-blue-300 rounded-lg mt-4 py-2 md:py-1 min-w-[70%] self-center text-lg'
+            className='border-2 border-blue-300 hover:bg-blue-300 rounded-lg mt-4 py-2 md:py-1 min-w-[70%] self-center text-lg'
             disabled={isLoading}
           >
             Submit
