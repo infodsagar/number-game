@@ -40,7 +40,9 @@ if (process.env.NODE_ENV === 'production') {
 const PORT = process.env.PORT || 4000;
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(
+    'mongodb+srv://infodsagar:Fallen*Saga2@cluster0.rxezg.mongodb.net/?retryWrites=true&w=majority'
+  )
   .then(() => {
     //Server waiting for req
     app.listen(PORT, () => {
