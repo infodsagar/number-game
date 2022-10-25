@@ -1,5 +1,5 @@
 //Import dotenv
-require('dotenv').config();
+require('dotenv').config({ path: path.resolve(__dirname, './.env') });
 
 //Import mongoose
 const mongoose = require('mongoose');
