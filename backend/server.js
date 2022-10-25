@@ -1,3 +1,5 @@
+const path = require('path');
+
 //Import dotenv
 require('dotenv').config({ path: path.resolve(__dirname, './.env') });
 
