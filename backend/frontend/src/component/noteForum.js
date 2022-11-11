@@ -41,8 +41,6 @@ export const NoteForum = () => {
 
     //Text only
     if (!file && text) {
-      console.log('text only ' + text);
-
       const response = await fetch('/api/notes/text', {
         method: 'POST',
         body: JSON.stringify(note),

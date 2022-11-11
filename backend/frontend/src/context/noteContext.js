@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer, useState } from 'react';
 
 export const NotesContext = createContext();
 
@@ -22,9 +22,10 @@ export const notesReducer = (state, action) => {
 
 export const NotesContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(notesReducer, { notes: null });
+  const [demo, setDemo] = useState(false);
 
   return (
-    <NotesContext.Provider value={{ ...state, dispatch }}>
+    <NotesContext.Provider value={{ ...state, dispatch, demo, setDemo }}>
       {children}
     </NotesContext.Provider>
   );

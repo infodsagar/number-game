@@ -15,12 +15,7 @@ const userSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
-  },
-  surname: {
-    type: String,
-    required: true,
-    unique: true,
+    unique: false,
   },
   username: {
     type: String,
@@ -30,7 +25,7 @@ const userSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
   },
   password: {
     type: String,
@@ -38,14 +33,8 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.statics.signup = async function (
-  name,
-  surname,
-  username,
-  email,
-  password
-) {
-  if (!name | !surname | !username | !email | !password) {
+userSchema.statics.signup = async function (name, username, email, password) {
+  if (!name | !username | !email | !password) {
     throw Error('All fields must be completed');
   }
 
@@ -70,7 +59,7 @@ userSchema.statics.signup = async function (
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = this.create({ name, surname, username, email, password: hash });
+  const user = this.create({ name, username, email, password: hash });
 
   return user;
 };
